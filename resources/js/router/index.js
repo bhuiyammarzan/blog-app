@@ -30,6 +30,11 @@ const routes = [
         component: Dashboard,
         meta: { requiresAuth: true },
     },
+    {
+        path: "/posts/:id",
+        name: "post-details",
+        component: () => import("../pages/PostDetails.vue"),
+    },
 ];
 
 const router = createRouter({

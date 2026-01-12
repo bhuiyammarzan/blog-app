@@ -4,6 +4,7 @@ import axios from "../axios";
 export const usePostStore = defineStore("posts", {
     state: () => ({
         posts: [],
+        currentPost: null,
         loading: false,
         error: null,
     }),
@@ -24,6 +25,21 @@ export const usePostStore = defineStore("posts", {
                 this.posts = response.data;
             } catch (error) {
                 this.error = error;
+            } finally {
+                this.loading = false;
+            }
+        },
+
+        async fetchSinglePost(id) {
+            this.loading = true;
+            this.error = null;
+            try {
+                const response = await axios.get(`/api/posts/${id}`);
+                this.currentPost = response.data;
+                return response.data;
+            } catch (error) {
+                this.error = error;
+                throw error;
             } finally {
                 this.loading = false;
             }

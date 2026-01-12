@@ -11,7 +11,11 @@
                 :key="post.id"
                 class="post-card"
             >
-                <h2>{{ post.title }}</h2>
+                <h2>
+                    <router-link :to="{ name: 'post-details', params: { id: post.id } }" class="post-link">
+                        {{ post.title }}
+                    </router-link>
+                </h2>
                 <div class="post-meta">
                     By {{ post.user ? post.user.name : "Unknown" }} on
                     {{ new Date(post.created_at).toLocaleDateString() }}
@@ -65,6 +69,16 @@ h1 {
 .post-card h2 {
     margin-bottom: 0.5rem;
     color: #2c3e50;
+}
+
+.post-link {
+    text-decoration: none;
+    color: #2c3e50;
+    transition: color 0.3s;
+}
+
+.post-link:hover {
+    color: #3498db;
 }
 
 .post-meta {
