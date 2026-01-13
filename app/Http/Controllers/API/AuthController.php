@@ -66,7 +66,9 @@ class AuthController extends Controller
         // Attempt to find the user
         if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
             $user = Auth::user();
-            $request->session()->regenerate();
+            if ($request->hasSession()) {
+                $request->session()->regenerate();
+            }
             return response()->json(['status' => true, 'message' => 'User logged in successfully', 'user' => $user], 200);
         } else {
             return response()->json(['status' => false, 'message' => 'Invalid credentials'], 401);
