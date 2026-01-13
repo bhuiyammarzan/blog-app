@@ -24,11 +24,18 @@
                     <button type="submit" :disabled="postStore.loading">
                         {{ isEditing ? "Update Post" : "Publish Post" }}
                     </button>
-                    <button v-if="isEditing" type="button" @click="cancelEdit" class="btn-cancel">
+                    <button
+                        v-if="isEditing"
+                        type="button"
+                        @click="cancelEdit"
+                        class="btn-cancel"
+                    >
                         Cancel
                     </button>
                 </div>
-                 <p v-if="postStore.error" class="error-msg">{{ postStore.error.message }}</p>
+                <p v-if="postStore.error" class="error-msg">
+                    {{ postStore.error.message }}
+                </p>
             </form>
         </div>
 
@@ -39,14 +46,27 @@
             </div>
             <ul v-else class="post-list">
                 <li v-for="post in userPosts" :key="post.id" class="post-item">
-                     <div class="post-content">
+                    <div class="post-content">
                         <h3>{{ post.title }}</h3>
                         <p class="post-body">{{ post.body }}</p>
-                        <small>Posted on {{ new Date(post.created_at).toLocaleDateString() }}</small>
+                        <small
+                            >Posted on
+                            {{
+                                new Date(post.created_at).toLocaleDateString()
+                            }}</small
+                        >
                     </div>
                     <div class="post-actions">
-                        <button @click="editPost(post)" class="btn-edit">Edit</button>
-                        <button @click="deletePost(post.id)" class="btn-delete" :disabled="postStore.loading">Delete</button>
+                        <button @click="editPost(post)" class="btn-edit">
+                            Edit
+                        </button>
+                        <button
+                            @click="deletePost(post.id)"
+                            class="btn-delete"
+                            :disabled="postStore.loading"
+                        >
+                            Delete
+                        </button>
                     </div>
                 </li>
             </ul>
@@ -72,7 +92,7 @@ const editingId = ref(null);
 // Get posts for the current user
 const userPosts = computed(() => {
     if (!authStore.user) return [];
-    return postStore.allPosts.filter(p => p.user_id === authStore.user.id);
+    return postStore.allPosts.filter((p) => p.user_id === authStore.user.id);
 });
 
 onMounted(() => {

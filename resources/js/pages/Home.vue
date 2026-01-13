@@ -12,7 +12,10 @@
                 class="post-card"
             >
                 <h2>
-                    <router-link :to="{ name: 'post-details', params: { id: post.id } }" class="post-link">
+                    <router-link
+                        :to="{ name: 'post-details', params: { id: post.id } }"
+                        class="post-link"
+                    >
                         {{ post.title }}
                     </router-link>
                 </h2>

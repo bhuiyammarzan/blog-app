@@ -4,11 +4,6 @@ use App\Http\Controllers\API\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\TaskController;
 
-
-// Route::get('/user', function (Request $request) {
-//     return $request->user();
-// })->middleware('auth:sanctum');
-
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 Route::get('/login', function () {
@@ -24,8 +19,3 @@ Route::middleware('auth:sanctum')->group(function () {
 
 Route::get('/posts', [\App\Http\Controllers\API\PostController::class, 'index']);
 Route::get('/posts/{post}', [\App\Http\Controllers\API\PostController::class, 'show']);
-
-// Route::middleware('auth:sanctum')->group(function () {
-//     // Route::post('/logout', [AuthController::class, 'logout']);
-//     Route::get('/user', [AuthController::class, 'user']);
-// });
